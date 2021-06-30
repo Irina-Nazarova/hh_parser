@@ -36,9 +36,11 @@ def get_content(html):
 
 
 def parser():
+    PAGENATION = input('Укажите колличество страниц для парсинга: ')
+    PAGENATION = int(PAGENATION.strip())
     html = get_html(URL)
     if html.status_code == 200:
-        pass
+        vacancies = []
     else:
         print('Error')
 
