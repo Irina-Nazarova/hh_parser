@@ -19,6 +19,7 @@ def get_html(url, params=None):
 
 
 def get_content(html):
+    """ Функция для получения данных с одной страницы."""
     soup = BeautifulSoup(html, "html.parser")
     items = soup.find_all('div', class_='vacancy-serp-item vacancy-serp-item_premium')
     vacancies =[]
@@ -41,6 +42,11 @@ def parser():
     html = get_html(URL)
     if html.status_code == 200:
         vacancies = []
+        for page in range(1, PAGENATION):
+            print(f" Парсинг страницы: {page}")
+            html = get_html(URL, params={"page": page})
+            vacancies.extend(get_content(html.text))
+        print(vacancies)
     else:
         print('Error')
 
